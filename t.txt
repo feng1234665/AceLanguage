@@ -1,0 +1,9 @@
+using "test";
+public static class A{
+public static int a;
+public static string b="12345";
+public void FuncA(){
+	int a=9+8*(3+7/2)+13*22/18+6;
+}
+
+}

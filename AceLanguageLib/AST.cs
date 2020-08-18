@@ -495,7 +495,9 @@ namespace AceLanguage
                             else
                             {
                                 lastNode.right = new ValueNode() { valueType = token.type, value = token.value };
-                                var n = new CalculateNode() { left = lastNode, symbol = ".", right = null };
+                                var n = new CalculateNode() { parent = lastNode.parent, left = lastNode, symbol = ".", right = null };
+                                if (lastNode.parent != null)
+                                    lastNode.parent.right = n;
                                 lastNode.parent = n;
                                 lastNode = n;
                             }
@@ -542,10 +544,12 @@ namespace AceLanguage
                                         lastNode.parent = n;
                                         lastNode = n;
                                     }
-                                    else if (GetOrder(lastNode.parent.symbol) > order)
+                                    else if (GetOrder(lastNode.parent.symbol) >= order)
                                     {
                                         lastNode.right = temp;
                                         var n = new CalculateNode() { parent = lastNode.parent, left = lastNode, symbol = tokens[index].value, right = null };
+                                        if (lastNode.parent != null)
+                                            lastNode.parent.right = n;
                                         lastNode.parent = n;
                                         lastNode = n;
                                     }
@@ -571,7 +575,9 @@ namespace AceLanguage
                                 if (GetOrder(lastNode.symbol) >= GetOrder(tokens[index + 1].value))
                                 {
                                     lastNode.right = new ValueNode() { valueType = token.type, value = token.value };
-                                    var n = new CalculateNode() { left = lastNode, symbol = tokens[index + 1].value, right = null };
+                                    var n = new CalculateNode() { parent = lastNode.parent, left = lastNode, symbol = tokens[index + 1].value, right = null };
+                                    if (lastNode.parent != null)
+                                        lastNode.parent.right = n;
                                     lastNode.parent = n;
                                     lastNode = n;
                                 }
@@ -682,7 +688,9 @@ namespace AceLanguage
                                 if (GetOrder(lastNode.symbol) >= GetOrder(tokens[index + 1].value))
                                 {
                                     lastNode.right = new ValueNode() { valueType = token.type, value = token.value };
-                                    var n = new CalculateNode() { left = lastNode, symbol = tokens[index + 1].value, right = null };
+                                    var n = new CalculateNode() { parent = lastNode.parent, left = lastNode, symbol = tokens[index + 1].value, right = null };
+                                    if (lastNode.parent != null)
+                                        lastNode.parent.right = n;
                                     lastNode.parent = n;
                                     lastNode = n;
                                 }
@@ -737,7 +745,9 @@ namespace AceLanguage
                                 if (GetOrder(lastNode.symbol) >= GetOrder(token.value))
                                 {
                                     lastNode.right = t_exp;
-                                    var n = new CalculateNode() { left = lastNode, symbol = tokens[index].value, right = null };
+                                    var n = new CalculateNode() { parent = lastNode.parent, left = lastNode, symbol = tokens[index].value, right = null };
+                                    if (lastNode.parent != null)
+                                        lastNode.parent.right = n;
                                     lastNode.parent = n;
                                     lastNode = n;
                                 }
@@ -783,7 +793,9 @@ namespace AceLanguage
                             else
                             {
                                 lastNode.right = new ValueNode() { valueType = token.type, value = token.value };
-                                var n = new CalculateNode() { left = lastNode, symbol = ".", right = null };
+                                var n = new CalculateNode() { parent = lastNode.parent, left = lastNode, symbol = ".", right = null };
+                                if(lastNode.parent!=null)
+                                lastNode.parent.right = n;
                                 lastNode.parent = n;
                                 lastNode = n;
                             }
@@ -830,10 +842,12 @@ namespace AceLanguage
                                         lastNode.parent = n;
                                         lastNode = n;
                                     }
-                                    else if (GetOrder(lastNode.symbol) > order)
+                                    else if (GetOrder(lastNode.symbol) >= order)
                                     {
                                         lastNode.right = temp;
                                         var n = new CalculateNode() { parent = lastNode.parent, left = lastNode, symbol = tokens[index].value, right = null };
+                                        if (lastNode.parent != null)
+                                            lastNode.parent.right = n;
                                         lastNode.parent = n;
                                         lastNode = n;
                                     }
@@ -860,7 +874,8 @@ namespace AceLanguage
                                 {
                                     lastNode.right = new ValueNode() { valueType = token.type, value = token.value };
                                     var n = new CalculateNode() {parent=lastNode.parent, left = lastNode, symbol = tokens[index+1].value, right = null };
-                                    lastNode.parent.right = n;
+                                    if (lastNode.parent != null)
+                                        lastNode.parent.right = n;
                                     lastNode.parent = n;
                                     lastNode = n;
                                 }
@@ -970,7 +985,9 @@ namespace AceLanguage
                                 if (GetOrder(lastNode.symbol) >= GetOrder(tokens[index + 1].value))
                                 {
                                     lastNode.right = new ValueNode() { valueType = token.type, value = token.value };
-                                    var n = new CalculateNode() { left = lastNode, symbol = tokens[index+1].value, right = null };
+                                    var n = new CalculateNode() { parent = lastNode.parent, left = lastNode, symbol = tokens[index+1].value, right = null };
+                                    if (lastNode.parent != null)
+                                        lastNode.parent.right = n;
                                     lastNode.parent = n;
                                     lastNode = n;
                                 }
@@ -1027,7 +1044,9 @@ namespace AceLanguage
                                 if (GetOrder(lastNode.symbol) >= GetOrder(token.value))
                                 {
                                     lastNode.right = t_exp;
-                                    var n = new CalculateNode() { left = lastNode, symbol = tokens[index].value, right = null };
+                                    var n = new CalculateNode() {parent=lastNode.parent, left = lastNode, symbol = tokens[index].value, right = null };
+                                    if (lastNode.parent != null)
+                                        lastNode.parent.right = n;
                                     lastNode.parent = n;
                                     lastNode = n;
                                 }
